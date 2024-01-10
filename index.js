@@ -8,10 +8,11 @@
 const visit = require('unist-util-visit')
 const { setNodeId, getDefaultId } = require('./util')
 
-// Move uniqueDefaultIdsCounters outside of the main function to persist across calls
-const uniqueDefaultIdsCounters = {}
+
 
 module.exports = function(options = { defaults: false, uniqueDefaults: true }) {
+  // Move uniqueDefaultIdsCounters outside of the main function to persist across calls
+const uniqueDefaultIdsCounters = {}
   return function(node) {
     visit(node, 'heading', node => {
       let lastChild = node.children[node.children.length - 1]
