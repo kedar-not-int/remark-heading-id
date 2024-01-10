@@ -12,8 +12,9 @@ const { setNodeId, getDefaultId } = require('./util')
 
 module.exports = function(options = { defaults: false, uniqueDefaults: true }) {
   // Move uniqueDefaultIdsCounters outside of the main function to persist across calls
-const uniqueDefaultIdsCounters = {}
+
   return function(node) {
+    const uniqueDefaultIdsCounters = {}
     visit(node, 'heading', node => {
       let lastChild = node.children[node.children.length - 1]
       if (lastChild && lastChild.type === 'text') {
