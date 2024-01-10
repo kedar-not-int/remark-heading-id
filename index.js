@@ -1,3 +1,5 @@
+// index.js
+
 /**
  * The remark plugin for supporting custom id and default id
  * @author imcuttle
@@ -6,11 +8,11 @@
 const visit = require('unist-util-visit')
 const { setNodeId, getDefaultId } = require('./util')
 
+// Move uniqueDefaultIdsCounters outside of the main function to persist across calls
+const uniqueDefaultIdsCounters = {}
+
 module.exports = function(options = { defaults: false, uniqueDefaults: true }) {
   return function(node) {
-
-    const uniqueDefaultIdsCounters = {}
-
     visit(node, 'heading', node => {
       let lastChild = node.children[node.children.length - 1]
       if (lastChild && lastChild.type === 'text') {
